@@ -1,6 +1,6 @@
 # machine-learning-hw
 
-Coding homework from the Machine Learning course taken at Columbia University Comp Sci department. Course taken in Spring 2018. 
+A selection of coding homework from the Machine Learning course taken at Columbia University Computer Science department. Course taken in Spring 2018. 
 
 Homework topics include: 
 - Implementation of the Perceptron algorithm on reviews and review ratings using unigram and tf-idf representations, without the usage of Python NLP libraries.
