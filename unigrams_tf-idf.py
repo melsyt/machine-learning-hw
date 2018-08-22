@@ -47,15 +47,6 @@ def get_corpus_word_doc_count(data):
 
         unique_words = set(words)
         word_doc_count.update([w for w in unique_words if not float(w)])
-        '''
-        for i in unique_words:
-            if is_number(i):
-                continue 
-            #elif i not in word_doc_count:
-            #    word_doc_count[i] = 1
-            #else:
-            #    word_doc_count[i] += 1
-        '''
 
     return word_doc_count
 
@@ -101,20 +92,14 @@ def get_doc_word_freq(document, word_index_map):
     """
     :param document: string
         document in the corpus
-    :param word_map: dict
+    :param word_index_map: dict
         dictionary containing all the words in the corpus that we're interested in
     :return: dict
-        key: unique word in document, value: number of times that word appears in document
+        {unique word in document: number of times that word appears in document}
     """
-    word_freq = {}
-    words = document.split(' ')
-    words = [word for word in words if word in word_index_map]
 
-    for word in words:
-        if word not in word_freq:
-            word_freq[word] = 1
-        else:
-            word_freq[word] += 1
+    words = document.split(' ')
+    word_freq = Counter([word for word in words if word in word_index_map])
 
     return word_freq
 
@@ -123,7 +108,7 @@ def build_sparse_unigram_dtm(X_data, word_index_map):
     """
     :param X_data: Pandas dataframe
         Contains the corpus of review text
-    :param word_map: dict
+    :param word_index_map: dict
         key is word that appears in text and value is the assigned index
     :return: sparse dok document-term-matrix
         Each column is mapped to a word in the corpus, each row represents one review (document),
@@ -160,7 +145,7 @@ def build_sparse_tfidf_dtm(X_data, word_index_map, word_doc_count):
     """
     :param X_data: Pandas dataframe
         Contains the corpus of review text
-    :param word_map: dict
+    :param word_index_map: dict
         key is word that appears in text and value is the assigned index
     :param word_doc_count: dict
         key is a word that appears in the corpus and value is the number of documents within the corpus that contains the word
